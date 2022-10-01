@@ -3,15 +3,35 @@
 
 <mapper namespace="com.atguigu.gulimall.product.dao.AttrGroupDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.atguigu.gulimall.product.entity.AttrGroupEntity" id="attrGroupMap">
         <result property="attrGroupId" column="attr_group_id"/>
         <result property="attrGroupName" column="attr_group_name"/>
         <result property="sort" column="sort"/>
         <result property="descript" column="descript"/>
         <result property="icon" column="icon"/>
-        <result property="catelogId" column="catelog_id"/>
+        <result property="catalogId" column="catalog_id"/>
     </resultMap>
+    <resultMap id="spuItemAttrGroupVo" type="com.atguigu.gulimall.product.vo.SpuItemAttrGroupVo">
+        <result column="attr_group_name" property="groupName"/>
+        <collection property="attrs" ofType="com.atguigu.gulimall.product.vo.Attr">
+            <result column="attr_id" property="attrId"/>
+            <result column="attr_name" property="attrName"/>
+            <result column="attr_value" property="attrValue"/>
+        </collection>
+    </resultMap>
+    <select id="getAttrGroupWithAttrsBySpuId" resultMap="spuItemAttrGroupVo">
+        SELECT pag.attr_group_name,
+               pag.attr_group_id,
+               paar.attr_id,
+               ppav.attr_name,
+               ppav.attr_value
+        FROM pms_attr_group pag
+                 LEFT JOIN pms_attr_attrgroup_relation paar ON pag.attr_group_id = paar.attr_group_id
+                 LEFT JOIN pms_product_attr_value ppav ON paar.attr_id = ppav.attr_id
+        WHERE catalog_id = #{catalogId}
+          AND spu_id = #{spuId}
+    </select>
 
 
 </mapper>

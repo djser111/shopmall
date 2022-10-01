@@ -5,7 +5,7 @@ spring:
   application:
     name: gulimall-coupon
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.56.10:3306/gulimall_sms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
@@ -13,9 +13,28 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8333
+  alibaba:
+    seata:
+      tx-service-group: gulimall-coupon-fescar-service-group
+  zipkin:
+    base-url: http://192.168.56.10:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
 
 mybatis-plus:
   mapper-locations: classpath:mapper/**/*.xml
   global-config:
     db-config:
       id-type: auto
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug
+    org.springframework.cloud.sleuth: debug

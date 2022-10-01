@@ -1,7 +1,11 @@
 package com.atguigu.gulimall.coupon.service.impl;
 
+import com.atguigu.common.to.SpuBoundTo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
 import java.util.Map;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -24,6 +28,13 @@ public class SpuBoundsServiceImpl extends ServiceImpl<SpuBoundsDao, SpuBoundsEnt
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public void save(SpuBoundTo spuBoundTo) {
+        SpuBoundsEntity spuBoundsEntity = new SpuBoundsEntity();
+        BeanUtils.copyProperties(spuBoundTo, spuBoundsEntity);
+        baseMapper.insert(spuBoundsEntity);
     }
 
 }

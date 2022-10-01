@@ -3,7 +3,7 @@
 
 <mapper namespace="com.atguigu.gulimall.product.dao.SkuInfoDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.atguigu.gulimall.product.entity.SkuInfoEntity" id="skuInfoMap">
         <result property="skuId" column="sku_id"/>
         <result property="spuId" column="spu_id"/>
@@ -17,6 +17,4 @@
         <result property="price" column="price"/>
         <result property="saleCount" column="sale_count"/>
     </resultMap>
-
-
 </mapper>

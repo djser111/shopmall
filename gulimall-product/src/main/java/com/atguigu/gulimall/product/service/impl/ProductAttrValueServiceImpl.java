@@ -1,7 +1,10 @@
 package com.atguigu.gulimall.product.service.impl;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -24,6 +27,21 @@ public class ProductAttrValueServiceImpl extends ServiceImpl<ProductAttrValueDao
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<ProductAttrValueEntity> baseAttrListForSpu(Long spuId) {
+        return baseMapper.selectList(new QueryWrapper<ProductAttrValueEntity>().eq("spu_id", spuId));
+
+    }
+
+    @Override
+    public void updateSpuAttr(Long spuId, List<ProductAttrValueEntity> entities) {
+        baseMapper.delete(new QueryWrapper<ProductAttrValueEntity>().eq("spu_id", spuId));
+        entities.forEach(item -> {
+            item.setSpuId(spuId);
+        });
+        this.saveBatch(entities);
     }
 
 }

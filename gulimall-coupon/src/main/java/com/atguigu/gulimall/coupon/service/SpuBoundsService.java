@@ -1,5 +1,6 @@
 package com.atguigu.gulimall.coupon.service;
 
+import com.atguigu.common.to.SpuBoundTo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.gulimall.coupon.entity.SpuBoundsEntity;
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface SpuBoundsService extends IService<SpuBoundsEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void save(SpuBoundTo spuBoundTo);
 }
 

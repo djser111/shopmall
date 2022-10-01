@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 库存工作单
@@ -15,6 +18,8 @@ import lombok.Data;
  * @date 2022-09-01 16:34:37
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("wms_ware_order_task_detail")
 public class WareOrderTaskDetailEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
